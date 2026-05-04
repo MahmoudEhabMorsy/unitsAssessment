@@ -1,0 +1,968 @@
+{
+  "info": {
+    "_postman_id": "d2d3b471-7618-4114-8adc-1248b364c870",
+    "name": "AutomationExercise",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50452057",
+    "_collection_link": "https://go.postman.co/collection/50452057-d2d3b471-7618-4114-8adc-1248b364c870?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Products API",
+      "item": [
+        {
+          "name": "Get All Products List",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"id\");\r",
+                  "    pm.expect(pm.response.text()).to.include(\"name\");\r",
+                  "    pm.expect(pm.response.text()).to.include(\"price\");\r",
+                  "    pm.expect(pm.response.text()).to.include(\"brand\");\r",
+                  "    pm.expect(pm.response.text()).to.include(\"category\"); \r",
+                  "});\r",
+                  "//to make sure at least one product is listed\r",
+                  "pm.test(\"Body has a total of \"+pm.response.json().products.length+\" Products\", function () {\r",
+                  " pm.expect(pm.response.json().products.length).to.greaterThan(1);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{productsListUrl}}",
+              "host": [
+                "{{productsListUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST To All Products List",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 405\", function () {\r",
+                  "    pm.expect(pm.response.code, \"This test should fail because the returned status code is not 405 instead it is 200\").to.equal(405);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"This request method is not supported.\");\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{productsListUrl}}",
+              "host": [
+                "{{productsListUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST To Search Product",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"Top\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "search_product",
+                  "value": "top",
+                  "type": "text",
+                  "uuid": "767bdcc6-f1d6-4f39-8b2f-0937c123b4bb"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{searchProductUrl}}",
+              "host": [
+                "{{searchProductUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST To Search Product without search_product parameter",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    pm.expect(pm.response.code, \"This test should fail because the returned status code is not 400 it is 200\").to.equal(400);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"search_product parameter is missing\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{searchProductUrl}}",
+              "host": [
+                "{{searchProductUrl}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Brands API",
+      "item": [
+        {
+          "name": "Get All Brands List",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"brand\");\r",
+                  "});\r",
+                  "//to make sure at least one brand is listed\r",
+                  "pm.test(\"Body has a total of \"+pm.response.json().brands.length+\" Brands\", function () {\r",
+                  "pm.expect(pm.response.json().brands.length).to.greaterThan(1);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{brandsListUrl}}",
+              "host": [
+                "{{brandsListUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT To All Brands List",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 405\", function () {\r",
+                  "    pm.expect(pm.response.code, \"This test should fail because the returned status code is not 405 instead it is 200\").to.equal(405);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"This request method is not supported.\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{brandsListUrl}}",
+              "host": [
+                "{{brandsListUrl}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User Account API",
+      "item": [
+        {
+          "name": "POST To Verify Login with valid details",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"User exists\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "{{validEmail}}",
+                  "type": "text",
+                  "uuid": "44acbd78-2509-4a85-bba7-167ce13da342"
+                },
+                {
+                  "key": "password",
+                  "value": "{{validPassword}}",
+                  "type": "text",
+                  "uuid": "c7722b94-2229-44fe-9095-5edf6cf70f39"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{verifyLoginUrl}}",
+              "host": [
+                "{{verifyLoginUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST To Verify Login without email parameter",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r",
+                  "    pm.expect(pm.response.code, \"This test should fail because the returned status code is not 404 instead it is 200\").to.equal(404);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"User not found\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "56c5d66c-14c6-48cd-b19a-f57d2baad19d"
+                },
+                {
+                  "key": "password",
+                  "value": "{{validPassword}}",
+                  "type": "text",
+                  "uuid": "4ec832b7-e538-4cfb-8003-d09f202862e1"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{verifyLoginUrl}}",
+              "host": [
+                "{{verifyLoginUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE To Verify Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 405\", function () {\r",
+                  "    pm.expect(pm.response.code, \"This test should fail because the returned status code is not 405 instead it is 200\").to.equal(405);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"This request method is not supported\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{verifyLoginUrl}}",
+              "host": [
+                "{{verifyLoginUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST To Verify Login with invalid details",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 404\", function () {\r",
+                  "    pm.expect(pm.response.code, \"This test should fail because the returned status code is not 404 instead it is 200\").to.equal(404);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"User not found\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "{{invalidEmail}}",
+                  "type": "text",
+                  "uuid": "c3fed09b-5f24-4127-b7ec-2db7dc4b69fd"
+                },
+                {
+                  "key": "password",
+                  "value": "{{invalidPassword}}",
+                  "type": "text",
+                  "uuid": "56e5b903-7fc6-4874-a48d-6ff54de00c6c"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{verifyLoginUrl}}",
+              "host": [
+                "{{verifyLoginUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST To Create/Register User Account",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.expect(pm.response.code, \"This test should fail because the returned status code is not 201 instead it is 200\").to.equal(201);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"User created\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "{{name}}",
+                  "type": "text",
+                  "uuid": "d72f3382-94d6-457c-869c-a4b6574e5f70"
+                },
+                {
+                  "key": "email",
+                  "value": "{{emailCreate}}",
+                  "type": "text",
+                  "uuid": "6f8768d3-ea49-4457-b26b-b27335225e59"
+                },
+                {
+                  "key": "password",
+                  "value": "{{passwordCreate}}",
+                  "type": "text",
+                  "uuid": "0759608a-e6d5-400e-86c1-9061986ab7ca"
+                },
+                {
+                  "key": "title",
+                  "value": "{{title}}",
+                  "type": "text",
+                  "uuid": "48685f4f-39bb-48a6-8aa1-a6877bdc4081"
+                },
+                {
+                  "key": "birth_date",
+                  "value": "{{birth_date}}",
+                  "type": "text",
+                  "uuid": "061cbe32-193b-4ebe-ac68-0eaa322e4de7"
+                },
+                {
+                  "key": "birth_month",
+                  "value": "{{birth_month}}",
+                  "type": "text",
+                  "uuid": "4f112df9-ef03-4c5a-afb9-989c253e4c16"
+                },
+                {
+                  "key": "birth_year",
+                  "value": "{{birth_year}}",
+                  "type": "text",
+                  "uuid": "c5caefd6-7fc6-40de-9af8-49db8aa7c883"
+                },
+                {
+                  "key": "firstname",
+                  "value": "{{firstname}}",
+                  "type": "text",
+                  "uuid": "391acec1-a871-4085-bf0e-e49c3ed29107"
+                },
+                {
+                  "key": "lastname",
+                  "value": "{{lastname}}",
+                  "type": "text",
+                  "uuid": "d4579797-6de5-4e37-aa22-bd21e63ad0a5"
+                },
+                {
+                  "key": "company",
+                  "value": "{{company}}",
+                  "type": "text",
+                  "uuid": "1cebea71-2f8a-4682-aebb-103efab84d47"
+                },
+                {
+                  "key": "address1",
+                  "value": "{{address1}}",
+                  "type": "text",
+                  "uuid": "cffcfdbb-af56-4c8b-bf7c-4936a9956d40"
+                },
+                {
+                  "key": "address2",
+                  "value": "{{address2}}",
+                  "type": "text",
+                  "uuid": "d9ebc64e-77d5-4291-9ee1-589901639802"
+                },
+                {
+                  "key": "country",
+                  "value": "{{country}}",
+                  "type": "text",
+                  "uuid": "570b43e3-dda7-4792-9e43-caa8888cdbc8"
+                },
+                {
+                  "key": "zipcode",
+                  "value": "{{zipcode}}",
+                  "type": "text",
+                  "uuid": "126f6331-1503-457f-802a-62e623bd45ff"
+                },
+                {
+                  "key": "state",
+                  "value": "{{state}}",
+                  "type": "text",
+                  "uuid": "cb20039d-c2a9-4cfd-b85d-8fd7364692db"
+                },
+                {
+                  "key": "city",
+                  "value": "{{city}}",
+                  "type": "text",
+                  "uuid": "1eca52ab-527c-412c-b3a0-39f456f60b92"
+                },
+                {
+                  "key": "mobile_number",
+                  "value": "{{mobile_number}}",
+                  "type": "text",
+                  "uuid": "6ec1bba2-bbe0-414c-be29-d91b36e292db"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{createAccountUrl}}",
+              "host": [
+                "{{createAccountUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE METHOD To Delete User Account",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"Account deleted\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "{{emailCreate}}",
+                  "type": "text",
+                  "uuid": "0b7eaffa-b9b2-45a1-ac0c-82b6405ded09"
+                },
+                {
+                  "key": "password",
+                  "value": "{{passwordCreate}}",
+                  "type": "text",
+                  "uuid": "ebb4d346-6c48-4059-b0f4-00e3d070d26d"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{deleteAccountUrl}}",
+              "host": [
+                "{{deleteAccountUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT METHOD To Update User Account",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    pm.expect(pm.response.text()).to.include(\"User updated\");\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "{{name}}",
+                  "type": "text",
+                  "uuid": "d72f3382-94d6-457c-869c-a4b6574e5f70"
+                },
+                {
+                  "key": "email",
+                  "value": "{{validEmail}}",
+                  "type": "text",
+                  "uuid": "6f8768d3-ea49-4457-b26b-b27335225e59"
+                },
+                {
+                  "key": "password",
+                  "value": "{{validPassword}}",
+                  "type": "text",
+                  "uuid": "0759608a-e6d5-400e-86c1-9061986ab7ca"
+                },
+                {
+                  "key": "title",
+                  "value": "{{title}}",
+                  "type": "text",
+                  "uuid": "48685f4f-39bb-48a6-8aa1-a6877bdc4081"
+                },
+                {
+                  "key": "birth_date",
+                  "value": "{{birth_date}}",
+                  "type": "text",
+                  "uuid": "061cbe32-193b-4ebe-ac68-0eaa322e4de7"
+                },
+                {
+                  "key": "birth_month",
+                  "value": "{{birth_month}}",
+                  "type": "text",
+                  "uuid": "4f112df9-ef03-4c5a-afb9-989c253e4c16"
+                },
+                {
+                  "key": "birth_year",
+                  "value": "{{birth_year}}",
+                  "type": "text",
+                  "uuid": "c5caefd6-7fc6-40de-9af8-49db8aa7c883"
+                },
+                {
+                  "key": "firstname",
+                  "value": "{{firstname}}",
+                  "type": "text",
+                  "uuid": "391acec1-a871-4085-bf0e-e49c3ed29107"
+                },
+                {
+                  "key": "lastname",
+                  "value": "{{lastname}}",
+                  "type": "text",
+                  "uuid": "d4579797-6de5-4e37-aa22-bd21e63ad0a5"
+                },
+                {
+                  "key": "company",
+                  "value": "{{company}}",
+                  "type": "text",
+                  "uuid": "1cebea71-2f8a-4682-aebb-103efab84d47"
+                },
+                {
+                  "key": "address1",
+                  "value": "{{address1}}",
+                  "type": "text",
+                  "uuid": "cffcfdbb-af56-4c8b-bf7c-4936a9956d40"
+                },
+                {
+                  "key": "address2",
+                  "value": "{{address2}}",
+                  "type": "text",
+                  "uuid": "d9ebc64e-77d5-4291-9ee1-589901639802"
+                },
+                {
+                  "key": "country",
+                  "value": "{{country}}",
+                  "type": "text",
+                  "uuid": "570b43e3-dda7-4792-9e43-caa8888cdbc8"
+                },
+                {
+                  "key": "zipcode",
+                  "value": "{{zipcode}}",
+                  "type": "text",
+                  "uuid": "126f6331-1503-457f-802a-62e623bd45ff"
+                },
+                {
+                  "key": "state",
+                  "value": "{{state}}",
+                  "type": "text",
+                  "uuid": "cb20039d-c2a9-4cfd-b85d-8fd7364692db"
+                },
+                {
+                  "key": "city",
+                  "value": "{{city}}",
+                  "type": "text",
+                  "uuid": "1eca52ab-527c-412c-b3a0-39f456f60b92"
+                },
+                {
+                  "key": "mobile_number",
+                  "value": "{{mobile_number}}",
+                  "type": "text",
+                  "uuid": "6ec1bba2-bbe0-414c-be29-d91b36e292db"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{updateAccountUrl}}",
+              "host": [
+                "{{updateAccountUrl}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET user account detail by email",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "pm.test(\"Body matches string\", function () {\r",
+                  "    let name = pm.collectionVariables.get(\"name\");\r",
+                  "    let email = pm.collectionVariables.get(\"validEmail\");\r",
+                  "    let title = pm.collectionVariables.get(\"title\");\r",
+                  "    let birth_day = pm.collectionVariables.get(\"birth_date\");\r",
+                  "    let birth_month = pm.collectionVariables.get(\"birth_month\");\r",
+                  "    let birth_year = pm.collectionVariables.get(\"birth_year\");\r",
+                  "    let first_name = pm.collectionVariables.get(\"firstname\");\r",
+                  "    let last_name = pm.collectionVariables.get(\"lastname\");\r",
+                  "    let company = pm.collectionVariables.get(\"company\");\r",
+                  "    let address1 = pm.collectionVariables.get(\"address1\");\r",
+                  "    let address2 = pm.collectionVariables.get(\"address2\");\r",
+                  "    let country = pm.collectionVariables.get(\"country\");\r",
+                  "    let state = pm.collectionVariables.get(\"state\");\r",
+                  "    let city = pm.collectionVariables.get(\"city\");\r",
+                  "    let zipcode = pm.collectionVariables.get(\"zipcode\");\r",
+                  "   \r",
+                  "    pm.expect(pm.response.json().user.name).to.eql(name);\r",
+                  "    pm.expect(pm.response.json().user.email).to.eql(email);\r",
+                  "    pm.expect(pm.response.json().user.title).to.eql(title);\r",
+                  "    pm.expect(pm.response.json().user.birth_day).to.eql(birth_day);\r",
+                  "    pm.expect(pm.response.json().user.birth_month).to.eql(birth_month);\r",
+                  "    pm.expect(pm.response.json().user.birth_year).to.eql(birth_year);\r",
+                  "    pm.expect(pm.response.json().user.first_name).to.eql(first_name);\r",
+                  "    pm.expect(pm.response.json().user.last_name).to.eql(last_name);\r",
+                  "    pm.expect(pm.response.json().user.company).to.eql(company);\r",
+                  "    pm.expect(pm.response.json().user.address1).to.eql(address1);\r",
+                  "    pm.expect(pm.response.json().user.address2).to.eql(address2);\r",
+                  "    pm.expect(pm.response.json().user.country).to.eql(country);\r",
+                  "    pm.expect(pm.response.json().user.state).to.eql(state);\r",
+                  "    pm.expect(pm.response.json().user.city).to.eql(city);\r",
+                  "    pm.expect(pm.response.json().user.zipcode).to.eql(zipcode);\r",
+                  "\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{getUserDetailByEmailUrl}}?email={{validEmail}}",
+              "host": [
+                "{{getUserDetailByEmailUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{validEmail}}",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "productsListUrl",
+      "value": "https://automationexercise.com/api/productsList"
+    },
+    {
+      "key": "brandsListUrl",
+      "value": "https://automationexercise.com/api/brandsList"
+    },
+    {
+      "key": "searchProductUrl",
+      "value": "https://automationexercise.com/api/searchProduct"
+    },
+    {
+      "key": "verifyLoginUrl",
+      "value": "https://automationexercise.com/api/verifyLogin"
+    },
+    {
+      "key": "createAccountUrl",
+      "value": "https://automationexercise.com/api/createAccount"
+    },
+    {
+      "key": "updateAccountUrl",
+      "value": "https://automationexercise.com/api/updateAccount"
+    },
+    {
+      "key": "getUserDetailByEmailUrl",
+      "value": "https://automationexercise.com/api/getUserDetailByEmail"
+    },
+    {
+      "key": "deleteAccountUrl",
+      "value": "https://automationexercise.com/api/deleteAccount"
+    },
+    {
+      "key": "validEmail",
+      "value": "test@test2026.com"
+    },
+    {
+      "key": "validPassword",
+      "value": "test2026"
+    },
+    {
+      "key": "invalidEmail",
+      "value": "invalid@invalid.com"
+    },
+    {
+      "key": "invalidPassword",
+      "value": "invalidpassword"
+    },
+    {
+      "key": "emailCreate",
+      "value": "test@test2027.com"
+    },
+    {
+      "key": "passwordCreate",
+      "value": "test2027"
+    },
+    {
+      "key": "name",
+      "value": "mahmoud"
+    },
+    {
+      "key": "title",
+      "value": "Mr"
+    },
+    {
+      "key": "birth_date",
+      "value": "29"
+    },
+    {
+      "key": "birth_month",
+      "value": "07"
+    },
+    {
+      "key": "birth_year",
+      "value": "2000"
+    },
+    {
+      "key": "firstname",
+      "value": "mahmoud"
+    },
+    {
+      "key": "lastname",
+      "value": "ehab"
+    },
+    {
+      "key": "company",
+      "value": "home"
+    },
+    {
+      "key": "address1",
+      "value": "cairo"
+    },
+    {
+      "key": "address2",
+      "value": "tenth of ramadan"
+    },
+    {
+      "key": "country",
+      "value": "egypt"
+    },
+    {
+      "key": "zipcode",
+      "value": "44561"
+    },
+    {
+      "key": "state",
+      "value": "cairo"
+    },
+    {
+      "key": "city",
+      "value": "tenth of ramadan"
+    },
+    {
+      "key": "mobile_number",
+      "value": "01555277172"
+    }
+  ]
+}
