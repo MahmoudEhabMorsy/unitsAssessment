@@ -26,8 +26,7 @@ The project is divided into four main sections:
 
 ## Deliverables & Links
 
-- **Test Report (Google Sheets)**:  
-  [Manual Test Cases & Bug Report](https://docs.google.com/spreadsheets/d/1SzlKqA-Yf8f3Q5D6q5yvSfbdqCnxgIYMAQ8FIgo9v_A/edit?usp=sharing)  
+- **Test Report (Google Sheets)**:  [Manual Test Cases & Bug Report](https://docs.google.com/spreadsheets/d/1SzlKqA-Yf8f3Q5D6q5yvSfbdqCnxgIYMAQ8FIgo9v_A/edit?usp=sharing)  
 
 - **Video Walkthrough**: [Explanation Video](https://drive.google.com/file/d/1snDXNdFsyAsNi7nWdVGeS2ORbeescHbT/view?usp=sharing)
 
