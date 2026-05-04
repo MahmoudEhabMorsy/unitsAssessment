@@ -1,4 +1,4 @@
-# QA Technical Assessment Portfolio
+# QA Technical Assessment (Units Assessment)
 
 This repository contains a comprehensive quality assurance project conducted for a Software Support and Integration Engineer assessment. It covers the full testing lifecycle, including manual execution, API validation, UI automation, and performance testing.
 
