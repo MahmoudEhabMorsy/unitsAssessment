@@ -29,7 +29,7 @@ The project is divided into four main sections:
 - **Test Report (Google Sheets)**:  
   https://docs.google.com/spreadsheets/d/1SzlKqA-Yf8f3Q5D6q5yvSfbdqCnxgIYMAQ8FIgo9v_A/edit?usp=sharing  
 
-- **Video Walkthrough**: [https://drive.google.com/file/d/1snDXNdFsyAsNi7nWdVGeS2ORbeescHbT/view?usp=sharing]
+- **Video Walkthrough**: https://drive.google.com/file/d/1snDXNdFsyAsNi7nWdVGeS2ORbeescHbT/view?usp=sharing
 
 ---
 
