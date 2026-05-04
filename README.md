@@ -10,8 +10,8 @@ The project is divided into four main sections:
 
 1. **Manual Testing & Bug Reporting**: Executed on the [SauceDemo](https://www.saucedemo.com/) (SwagLabs) website.  
 2. **API Testing**: Functional and error-handling tests for the [Automation Exercise API](https://automationexercise.com/api_list).  
-3. **UI Automation**: A Selenium-based Page Object Model (POM) suite for critical user paths.  
-4. **Load Testing**: Performance benchmarking for API endpoints using Apache JMeter.
+3. **UI Automation**: A Selenium-based Page Object Model (POM) suite for critical user paths Executed on the [SauceDemo](https://www.saucedemo.com/) (SwagLabs) website.  
+4. **Load Testing**: Performance benchmarking for API endpoints using Apache JMeter using [Automation Exercise API](https://automationexercise.com/api_list).
 
 ---
 
